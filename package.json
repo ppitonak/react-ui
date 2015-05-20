@@ -1,0 +1,22 @@
+{
+  "name": "react-ide",
+  "version": "0.0.1",
+  "repository": "https://github.com/kenfinnigan/codeeditor/",
+  "description": "Web IDE based on ReactJS.",
+  "keywords": [
+    "WebIDE"
+  ],
+  "author": "Ken Finnigan",
+  "license": "Eclipse Public License - v1.0",
+  "devDependencies": {
+    "bower": "^1.4.1",
+    "gulp": "^3.8.11",
+    "gulp-livereload": "^3.8.0",
+    "gulp-mocha": "^2.0.1",
+    "gulp-util": "^3.0.4",
+    "mocha": "^2.2.5",
+    "should": "^6.0.3",
+    "supertest": "^1.0.1",
+    "supertest-as-promised": "^2.0.1"
+  }
+}

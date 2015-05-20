@@ -1,0 +1,30 @@
+{
+  "name": "react-ide",
+  "version": "0.0.1",
+  "authors": [
+    "Ken Finnigan <ken@kenfinnigan.me"
+  ],
+  "description": "Web IDE based on ReactJS.",
+  "keywords": [
+    "WebIDE"
+  ],
+  "license": "Eclipse Public License - v1.0",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "patternfly": "1.1.4",
+    "codemirror": "~5.2.0",
+    "tern": "marijnh/tern#~0.10.0",
+    "acorn": "marijnh/acorn#~1.1.0",
+    "reflux": "~0.2.7",
+    "react": "~0.13.3",
+    "react-router": "~0.13.3"
+  }
+}
