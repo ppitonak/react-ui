@@ -19,12 +19,12 @@
     "tests"
   ],
   "dependencies": {
-    "patternfly": "1.1.4",
-    "codemirror": "~5.2.0",
-    "tern": "marijnh/tern#~0.10.0",
-    "acorn": "marijnh/acorn#~1.1.0",
-    "reflux": "~0.2.7",
-    "react": "~0.13.3",
-    "react-router": "~0.13.3"
+    "patternfly": "1.1.x",
+    "codemirror": "5.2.x",
+    "tern": "marijnh/tern#0.10.x",
+    "acorn": "marijnh/acorn#1.1.x",
+    "reflux": "0.2.x",
+    "react": "0.13.x",
+    "react-router": "0.13.x"
   }
 }
