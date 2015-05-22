@@ -29,25 +29,23 @@ module.exports = function(gulp, opts) {
     transform: [reactify, es6ify.configure(/.jsx/)]
   };
 
-  var opts = _.extend({}, watchify.args, browserifyOpts);
+  var customOpts = _.extend({}, watchify.args, browserifyOpts);
 
-  var bundler = watchify(browserify(opts));
-
-  var dist = opts.paths.build;
+  var browserifyBundle = browserify(customOpts);
 
   es6ify.traceurOverrides = {experimental: true};
 
-//  bundler.require(opts.requireFiles);
+  browserifyBundle.on('update', bundle);
+  browserifyBundle.on('log', gutil.log);
 
-  bundler.on('update', bundle);
-  bundler.on('log', gutil.log);
-
-  gulp.task('bundle', bundle(bundler, opts));
+  gulp.task('bundle', function() {
+    bundle(false);
+  });
 
   gulp.task('serve', function (next) {
-      var app = connect();
-      app.use(serveStatic(dist));
-      app.listen(opts.port, next);
+    var app = connect();
+    app.use(serveStatic(opts.paths.build));
+    app.listen(opts.port, next);
   });
 
   gulp.task('main', ['vendor', 'serve'], function () {
@@ -61,17 +59,18 @@ module.exports = function(gulp, opts) {
       gulp.watch(files, [task]);
     }
 
-    bundle();
+    bundle(true);
 
     initWatch(opts.htmlFiles, 'html');
 
-    gulp.watch([opts.paths.dist + '/**/*'], reloadPage);
+    gulp.watch([opts.paths.build + '/**/*'], reloadPage);
   });
 
-  function bundle() {
+  function bundle(watch) {
+    var bundler = watch ? watchify(browserifyBundle) : browserifyBundle;
     return bundler.bundle()
       .on('error', gutil.log.bind(gutil, 'Browserify Error'))
       .pipe(source('bundle.js'))
-      .pipe(gulp.dest(opts.paths.dist + '/js'));
+      .pipe(gulp.dest(opts.paths.build + '/js'));
   }
 };

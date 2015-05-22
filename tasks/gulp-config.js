@@ -14,7 +14,6 @@ var opts = {
     'bower_components/react/react-with-addons.js',
     'bower_components/patternfly/dist/css/patternfly.css'
   ],
-  requireFiles: 'bower_components/react/react.js',
   entryFile: './app/js/app.jsx',
 
   lrPort: 35729,
