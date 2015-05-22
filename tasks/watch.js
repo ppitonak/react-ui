@@ -27,11 +27,6 @@ module.exports = function(gulp, opts) {
         pipe(gulp.dest(opts.paths.vendorBuild));
   });
 
-  gulp.task('html', function () {
-    return gulp.src(opts.htmlFiles).
-        pipe(gulp.dest(opts.paths.htmlBuild));
-  });
-
   var browserifyOpts = {
     entries: opts.entryFile,
     debug: true,

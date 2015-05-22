@@ -29,4 +29,9 @@ module.exports = function(gulp, opts) {
       .pipe(uglify())
       .pipe(gulp.dest(opts.dest.dist));
   });
+
+  gulp.task('html', function() {
+    return gulp.src(opts.paths.html).
+        pipe(gulp.dest(opts.dest.dist));
+  });
 };

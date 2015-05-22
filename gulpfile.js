@@ -14,18 +14,18 @@ gulp.task('default', ['serve']);
 
 gulp.task('install', ['bower-install']);
 
-gulp.task('serve', ['clean', 'lint', 'js', 'server'], function() {
+gulp.task('serve', ['clean', 'lint', 'html', 'js', 'server'], function() {
   return gulp.watch([
     opts.paths.jsx, opts.paths.html
   ], [
-    'lint', 'js', browserSync.reload
+    'lint', 'html', 'js', browserSync.reload
   ]);
 });
 
-gulp.task('serve:minified', ['clean', 'lint', 'js:min', 'server'], function() {
+gulp.task('serve:minified', ['clean', 'lint', 'html', 'js:min', 'server'], function() {
   return gulp.watch([
     opts.paths.jsx, opts.paths.html
   ], [
-    'lint', 'js:min', browserSync.reload
+    'lint', 'html', 'js:min', browserSync.reload
   ]);
 });

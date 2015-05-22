@@ -6,12 +6,11 @@ var opts = {
   paths: {
     html: './app/**/*.html',
     jsx: './app/**/*.jsx',
-    app: './app/app.jsx',
-    vendorBuild: 'dist/vendor'
+    app: './app/app.jsx'
   },
   dest: {
     app: 'app.js',
-    dist: 'dist'
+    dist: './dist'
   },
   vendorFiles: [
     'bower_components/react/react-with-addons.js',
