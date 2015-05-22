@@ -10,3 +10,6 @@ require('./tasks/watch.js')(gulp, opts);
 gulp.task('default', ['main']);
 
 gulp.task('install', ['npm-install', 'bower-install']);
+
+// Build the JS files from JSX only
+gulp.task('js', ['bundle']);

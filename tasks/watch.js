@@ -1,11 +1,15 @@
 'use strict';
 
-var livereload = require('gulp-livereload'),
-    gutil      = require('gulp-util'),
-    rename     = require('gulp-rename'),
-    browserify = require('browserify'),
-    watchify   = require('watchify'),
-    es6ify     = require('es6ify');
+var livereload  = require('gulp-livereload'),
+    gutil       = require('gulp-util'),
+    source      = require('vinyl-source-stream'),
+    connect     = require('connect'),
+    serveStatic = require('serve-static'),
+    browserify  = require('browserify'),
+    watchify    = require('watchify'),
+    es6ify      = require('es6ify'),
+    reactify    = require('reactify'),
+    _           = require('underscore');
 
 module.exports = function(gulp, opts) {
   gulp.task('vendor', function () {
@@ -19,39 +23,31 @@ module.exports = function(gulp, opts) {
         pipe(gulp.dest(opts.paths.htmlBuild));
   });
 
-  function compileScripts(watch) {
-    gutil.log('Starting browserify');
+  var browserifyOpts = {
+    entries: opts.entryFile,
+    debug: true,
+    transform: [reactify, es6ify.configure(/.jsx/)]
+  };
 
-    es6ify.traceurOverrides = {experimental: true};
+  var opts = _.extend({}, watchify.args, browserifyOpts);
 
-    var bundler;
-    if (watch) {
-      bundler = watchify(opts.entryFile);
-    } else {
-      bundler = browserify(opts.entryFile);
-    }
+  var bundler = watchify(browserify(opts));
 
-    bundler.require(opts.requireFiles);
-    bundler.transform(reactify);
-    bundler.transform(es6ify.configure(/.jsx/));
+  var dist = opts.paths.build;
 
-    var rebundle = function () {
-      var stream = bundler.bundle({ debug: true});
+  es6ify.traceurOverrides = {experimental: true};
 
-      stream.on('error', function (err) { console.error(err) });
-      stream = stream.pipe(source(opts.entryFile));
-      stream.pipe(rename('app.js'));
+//  bundler.require(opts.requireFiles);
 
-      stream.pipe(gulp.dest('dist/bundle'));
-    }
+  bundler.on('update', bundle);
+  bundler.on('log', gutil.log);
 
-    bundler.on('update', rebundle);
-    return rebundle();
-  }
+  gulp.task('bundle', bundle(bundler, opts));
 
   gulp.task('serve', function (next) {
-      var server = connect();
-      server.use(connect.static(opts.paths.dist)).listen(opts.port, next);
+      var app = connect();
+      app.use(serveStatic(dist));
+      app.listen(opts.port, next);
   });
 
   gulp.task('main', ['vendor', 'serve'], function () {
@@ -65,9 +61,17 @@ module.exports = function(gulp, opts) {
       gulp.watch(files, [task]);
     }
 
-    compileScripts(true);
+    bundle();
+
     initWatch(opts.htmlFiles, 'html');
 
     gulp.watch([opts.paths.dist + '/**/*'], reloadPage);
   });
+
+  function bundle() {
+    return bundler.bundle()
+      .on('error', gutil.log.bind(gutil, 'Browserify Error'))
+      .pipe(source('bundle.js'))
+      .pipe(gulp.dest(opts.paths.dist + '/js'));
+  }
 };

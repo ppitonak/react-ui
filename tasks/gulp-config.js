@@ -1,13 +1,12 @@
 'use strict';
 
-var _ = require('underscore')
-  ;
+var _ = require('underscore');
 
 var opts = {
   paths: {
-    dist: 'dist',
-    htmlBuild: opts.paths.dist,
-    vendorBuild: opts.paths.dist + '/vendor'
+    build: 'dist',
+    htmlBuild: 'dist',
+    vendorBuild: 'dist/vendor'
   },
   htmlFiles: 'app/**/*.html',
   jsxFiles: 'app/**/*.jsx',
@@ -16,7 +15,7 @@ var opts = {
     'bower_components/patternfly/dist/css/patternfly.css'
   ],
   requireFiles: 'bower_components/react/react.js',
-  entryFile: './app/app.jsx',
+  entryFile: './app/js/app.jsx',
 
   lrPort: 35729,
   hostname: 'localhost',
