@@ -1,21 +1,13 @@
 'use strict';
 
-var exec = require('child_process').exec;
+var bower = require('bower');
 
 module.exports = function(gulp, opts) {
-  gulp.task('npm-install', function (cb) {
-    exec('npm install', function (err, stdout, stderr) {
-      console.log(stdout);
-      console.log(stderr);
-      cb(err);
-    });
-  });
-
   gulp.task('bower-install', function (cb) {
-    exec('bower install', function (err, stdout, stderr) {
-      console.log(stdout);
-      console.log(stderr);
-      cb(err);
-    });
+    bower.commands.install([], {save: true}, {})
+      .on('end', function(installed) {
+        console.log(installed);
+        cb();
+      });
   });
 };
