@@ -4,19 +4,28 @@ var livereload  = require('gulp-livereload'),
     gutil       = require('gulp-util'),
     source      = require('vinyl-source-stream'),
     connect     = require('connect'),
+    del         = require('del'),
     serveStatic = require('serve-static'),
     browserify  = require('browserify'),
     watchify    = require('watchify'),
     es6ify      = require('es6ify'),
     reactify    = require('reactify'),
+    browserSync = require('browser-sync'),
     _           = require('underscore');
 
 module.exports = function(gulp, opts) {
+  gulp.task('server', function () {
+    browserSync({
+      server: {
+        baseDir: opts.dest.dist
+      }
+    });
+  });
+
   gulp.task('vendor', function () {
     return gulp.src(opts.vendorFiles).
         pipe(gulp.dest(opts.paths.vendorBuild));
   });
-
 
   gulp.task('html', function () {
     return gulp.src(opts.htmlFiles).
@@ -26,6 +35,7 @@ module.exports = function(gulp, opts) {
   var browserifyOpts = {
     entries: opts.entryFile,
     debug: true,
+    fullPaths: true,
     transform: [reactify, es6ify.configure(/.jsx/)]
   };
 

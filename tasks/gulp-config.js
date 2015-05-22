@@ -4,12 +4,15 @@ var _ = require('underscore');
 
 var opts = {
   paths: {
-    build: 'dist',
-    htmlBuild: 'dist',
+    html: './app/**/*.html',
+    jsx: './app/**/*.jsx',
+    app: './app/app.jsx',
     vendorBuild: 'dist/vendor'
   },
-  htmlFiles: 'app/**/*.html',
-  jsxFiles: 'app/**/*.jsx',
+  dest: {
+    app: 'app.js',
+    dist: 'dist'
+  },
   vendorFiles: [
     'bower_components/react/react-with-addons.js',
     'bower_components/patternfly/dist/css/patternfly.css'
