@@ -10,17 +10,12 @@ var opts = {
   },
   dest: {
     app: 'app.js',
-    dist: './dist'
+    dist: './dist',
+    vendorDist: './dist/lib'
   },
-  vendorFiles: [
-    'bower_components/react/react-with-addons.js',
-    'bower_components/patternfly/dist/css/patternfly.css'
-  ],
-  entryFile: './app/js/app.jsx',
-
-  lrPort: 35729,
-  hostname: 'localhost',
-  port: process.env.PORT || '9000'
+  vendors: [
+    'react'
+  ]
 };
 
 module.exports = function(gulp, baseOpts) {
