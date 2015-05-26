@@ -3,7 +3,7 @@
 var browserSync = require('browser-sync');
 
 module.exports = function(gulp, opts) {
-  gulp.task('server', ['vendors', 'html', 'js'], function () {
+  gulp.task('server', ['html', 'js'], function () {
     browserSync({
       server: {
         baseDir: opts.dest.dist
@@ -12,7 +12,7 @@ module.exports = function(gulp, opts) {
     });
   });
 
-  gulp.task('server:min', ['vendors', 'html', 'js:min'], function () {
+  gulp.task('server:min', ['html', 'js:min'], function () {
     browserSync({
       server: {
         baseDir: opts.dest.dist

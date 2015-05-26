@@ -1,4 +1,6 @@
-const React = require('react');
+'use strict';
+
+import React from '../dist/lib/react';
 
 React.render(
   <h1>Hello from React</h1>,
