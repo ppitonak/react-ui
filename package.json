@@ -7,26 +7,41 @@
     "WebIDE"
   ],
   "author": "Ken Finnigan",
-  "license": "Eclipse Public License - v1.0",
+  "license": "EPL-1.0",
+  "dependencies": {
+    "react": "0.13.3"
+  },
   "devDependencies": {
     "babelify": "6.1.x",
     "bower": "1.4.x",
-    "browserify": "10.2.x",
     "browser-sync": "latest",
+    "browserify": "10.2.x",
     "connect": "3.3.x",
-    "serve-static": "1.9.x",
     "del": "latest",
     "es6ify": "1.6.x",
-    "gulp": "3.8.x",
-    "gulp-mocha": "2.0.x",
+    "gulp": "3.9.x",
+    "gulp-mocha": "2.1.x",
     "gulp-uglify": "latest",
     "gulp-util": "3.0.x",
+    "jest-cli": "^0.4.7",
     "mocha": "2.2.x",
+    "react-tools": "^0.13.3",
+    "serve-static": "1.9.x",
     "should": "6.0.x",
     "supertest": "1.0.x",
     "supertest-as-promised": "2.0.x",
     "underscore": "1.8.x",
     "vinyl-buffer": "latest",
     "vinyl-source-stream": "1.1.x"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "scriptPreprocessor": "<rootDir>/preprocessor.js",
+    "unmockedModulePathPatterns": [
+      "<rootDir>/dist/lib/react",
+      "<rootDir>/node_modules/react"
+    ]
   }
 }
