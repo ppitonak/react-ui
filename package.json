@@ -16,6 +16,7 @@
     "bower": "1.4.x",
     "browser-sync": "latest",
     "browserify": "10.2.x",
+    "chai": "^3.0.0",
     "connect": "3.3.x",
     "del": "latest",
     "es6ify": "1.6.x",
@@ -23,8 +24,8 @@
     "gulp-mocha": "2.1.x",
     "gulp-uglify": "latest",
     "gulp-util": "3.0.x",
-    "jest-cli": "^0.4.7",
-    "mocha": "2.2.x",
+    "jsdom": "^3.1.2",
+    "mocha": "^2.2.5",
     "react-tools": "^0.13.3",
     "serve-static": "1.9.x",
     "should": "6.0.x",
@@ -35,13 +36,6 @@
     "vinyl-source-stream": "1.1.x"
   },
   "scripts": {
-    "test": "jest"
-  },
-  "jest": {
-    "scriptPreprocessor": "<rootDir>/preprocessor.js",
-    "unmockedModulePathPatterns": [
-      "<rootDir>/dist/lib/react",
-      "<rootDir>/node_modules/react"
-    ]
+    "test": "mocha --compilers .:tests/util/compiler.js tests/*-test.js"
   }
 }
