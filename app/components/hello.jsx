@@ -1,6 +1,6 @@
 'use strict';
 
-var React = require('../../dist/lib/react');
+var React = require('../../node_modules/react/react');
 
 module.exports = React.createClass({
     render: function() {

@@ -24,7 +24,6 @@
     "tern": "marijnh/tern#0.10.x",
     "acorn": "marijnh/acorn#1.1.x",
     "reflux": "0.2.x",
-    "react": "0.13.x",
     "react-router": "0.13.x"
   }
 }
