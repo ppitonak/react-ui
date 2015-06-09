@@ -21,7 +21,7 @@
     "del": "latest",
     "es6ify": "1.6.x",
     "gulp": "3.9.x",
-    "gulp-mocha": "2.1.x",
+    "gulp-mocha": "^2.1.1",
     "gulp-uglify": "latest",
     "gulp-util": "3.0.x",
     "jsdom": "^3.1.2",
@@ -36,6 +36,7 @@
     "vinyl-source-stream": "1.1.x"
   },
   "scripts": {
-    "test": "mocha --compilers .:tests/util/compiler.js tests/*-test.js"
+    "test": "mocha --compilers .:tests/util/compiler.js tests/*-test.js",
+    "debug": "mocha --debug-brk --compilers .:tests/util/compiler.js"
   }
 }
